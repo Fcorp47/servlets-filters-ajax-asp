@@ -1,0 +1,20 @@
+CREATE PROCEDURE spAuthenticateStudent 
+	@Email varchar(256),
+	@Password varchar(256)
+AS
+BEGIN
+	Declare @count int
+
+	Select @count = COUNT(EmailID) from tblStudent
+	Where EmailID = @Email and Password = @Password
+
+	if @count = 1
+	begin
+		select 1 as ReturnCode
+	end
+	else
+	begin
+		select -1 as ReturnCode
+	end
+END
+GO
